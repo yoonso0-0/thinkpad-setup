@@ -52,6 +52,8 @@ ZSH_THEME="powerlevel10k/powerlevel10k"
 # ENABLE_CORRECTION="true"
 
 # Uncomment the following line to display red dots whilst waiting for completion.
+# Caution: this setting can cause issues with multiline prompts (zsh 5.7.1 and newer seem to work)
+# See https://github.com/ohmyzsh/ohmyzsh/issues/5765
 # COMPLETION_WAITING_DOTS="true"
 
 # Uncomment the following line if you want to disable marking untracked files
@@ -75,9 +77,24 @@ ZSH_THEME="powerlevel10k/powerlevel10k"
 # Custom plugins may be added to $ZSH_CUSTOM/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git zsh-syntax-highlighting zsh-autosuggestions)
+plugins=(
+    emoji
+    git
+    git-extras
+    git-prompt
+    history
+    pip
+    python
+    ubuntu
+    zsh-autosuggestions
+    zsh-completions
+    # fast-syntax-highlighting must be at the end!
+    fast-syntax-highlighting
+)
 
-source $ZSH/oh-my-zsh.sh
+if [ -f $ZSH/oh-my-zsh.sh ]; then
+    source $ZSH/oh-my-zsh.sh
+fi
 
 # User configuration
 
@@ -91,12 +108,15 @@ source $ZSH/oh-my-zsh.sh
 #   export EDITOR='vim'
 # else
 #   export EDITOR='mvim'
+# fi
 
 ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE="fg=30"
-# fi
 
 # Compilation flags
 # export ARCHFLAGS="-arch x86_64"
+
+# To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
+[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 
 # Set personal aliases, overriding those provided by oh-my-zsh libs,
 # plugins, and themes. Aliases can be placed here, though oh-my-zsh
@@ -104,35 +124,9 @@ ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE="fg=30"
 # For a full list of active aliases, run `alias`.
 #
 # Example aliases
-# alias zshconfig="mate ~/.zshrc"
-# alias ohmyzsh="mate ~/.oh-my-zsh"
-
-# ------------------------------------------------------------
-
-# >>> conda initialize >>>
-# !! Contents within this block are managed by 'conda init' !!
-__conda_setup="$('/home/yoonsoo/anaconda3/bin/conda' 'shell.bash' 'hook' 2> /dev/null)"
-if [ $? -eq 0 ]; then
-    eval "$__conda_setup"
-else
-    if [ -f "/home/yoonsoo/anaconda3/etc/profile.d/conda.sh" ]; then
-        . "/home/yoonsoo/anaconda3/etc/profile.d/conda.sh"
-    else
-        export PATH="/home/yoonsoo/anaconda3/bin:$PATH"
-    fi
-fi
-unset __conda_setup
-# <<< conda initialize <<<
-
-
-# personal key bindings
-
-# To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
-[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
-
-export PATH=$HOME/.local/bin:$PATH
 
 alias vi='nvim'
 alias vim='nvim'
 
-alias rm=trash
+alias rm="trash"
+
