@@ -1,5 +1,7 @@
 [user]
 	email = ykim7@caltech.edu
 	name = Yoonsoo Kim
+[core]
+	editor = vim
 [pager]
 	branch = false
